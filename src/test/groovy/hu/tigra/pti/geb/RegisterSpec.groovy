@@ -21,6 +21,12 @@ class RegisterSpec extends BaseSpec {
         registerPage.firstName = 'Elek'
         registerPage.lastName = 'Teszt'
         registerPage.password = 'teszt123'
+        registerPage.bDay.selected = '23'
+        registerPage.bMonth.selected = '4'
+        registerPage.bYear.selected = '1998'
+        registerPage.spam.check()
+        registerPage.optin.check()
+        registerPage.submitAcc.click()
 
         then: '5 hibaüzenet jelenik meg'
         true
