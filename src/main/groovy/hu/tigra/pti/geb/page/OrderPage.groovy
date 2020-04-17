@@ -18,12 +18,12 @@ class OrderPage extends Page {
         // 3. házi feladat
         // A summaryFirstRow a táblázat első sorát választja ki
         // A táblázat "tbody"-ában az első "tr"-t kell beadni a ProductRow modulba
-        summaryFirstRow(required: false) { }
+        summaryFirstRow(required: false) { $('table[id="cart_summary"] tbody tr:first-of-type').module(ProductRow) }
 
-        shippingAgreeTerms(required: false) {  }
+        shippingAgreeTerms(required: false) { $('input[id="cgv"]').module(Checkbox) }
 
-        paymentCheckButton(required: false) {  }
+        paymentCheckButton(required: false) { $('p[class="payment_module"] a[class="cheque"][title="Pay by check."]') }
 
-        message(required: false) {  }
+        message(required: false) { $('p[class="alert alert-success"]:first-of-type') }
     }
 }

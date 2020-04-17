@@ -39,27 +39,40 @@ class OrderSpec extends BaseSpec {
 
         // 3. Házi feladat
         when: 'Rákattintok a plusz gombra az első sorban'
+        orderPage.summaryFirstRow.plusButton.click()
 
         then: 'A mennyiség 2-re változik'
+        waitFor {orderPage.summaryFirstRow.quantity == 2}
 
         when: 'Rákattintok a "Proceed to checkout" gombra'
+        orderPage.nextButton.click()
 
         then: 'Megjelenik az "ADDRESSES" fejlécű oldal'
+        orderPage.header.text().startsWith('ADDRESSES')
 
         when: 'Rákattintok a "Proceed to checkout" gombra'
+        orderPage.nextButton.click()
 
         then: 'Megjelenik a "SHIPPING" fejlécű oldal'
+        orderPage.header.text().startsWith('SHIPPING')
 
         when: 'Bepipálom a checkboxot és rákattintok a "Proceed to checkout" gombra'
+        orderPage.shippingAgreeTerms.check()
+        orderPage.nextButton.click()
 
         then: 'Megjelenik a "PLEASE CHOOSE YOUR PAYMENT METHOD" fejlécű oldal'
+        orderPage.header.text().startsWith('PLEASE CHOOSE YOUR PAYMENT METHOD')
 
         when: 'Kiválasztom a csekk fizetési módot'
+        orderPage.paymentCheckButton.click()
 
         then: 'Megjelenik az "ORDER SUMMARY" fejlécű oldal'
+        orderPage.header.text().startsWith('ORDER SUMMARY')
 
         when: 'Rákattintok az "I confirm my order" gombra'
+        orderPage.nextButton.click()
 
         then: 'Megjelenik a sikeres rendelés üzenete: "Your order on My Store is complete."'
+        waitFor { orderPage.message.text() == "Your order on My Store is complete."}
     }
 }
