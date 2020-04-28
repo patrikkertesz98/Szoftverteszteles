@@ -1,5 +1,6 @@
 package pti.gyak;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -7,7 +8,7 @@ import org.junit.Test;
 public class CalculatorTest {
     @Test
     public void testResult() {
-        assertEquals(6.0, (new Calculator()).enter(5).enter(Operation.ADD).enter(1).result);
+        assertEquals(6.0, (new Calculator()).enter(5).enter(Operation.ADD).enter(1).getResult());
     }
 
     @Test
@@ -60,8 +61,32 @@ public class CalculatorTest {
     }
 
     @Test
-    public void testShit()
+    public void testGetResult()
     {
         assertEquals(0,(new Calculator().getResult()));
+    }
+
+    @Test
+    public void testDivideWithZeroPositive() {assertEquals(Double.POSITIVE_INFINITY, (new Calculator().enter(3).enter(Operation.DIVIDE).enter(0)).getResult());}
+
+    @Test
+    public void testDivideWithZeroNegative() {assertEquals(Double.NEGATIVE_INFINITY, (new Calculator().enter(-3).enter(Operation.DIVIDE).enter(0)).getResult());}
+
+    @Test
+    public void testSQRT() {
+        assertEquals(2.0, (new Calculator()).enter(4).enter(Operation.SQRT).getResult());
+    }
+    @Test
+    public void testOperationNull() {
+        Calculator test = new Calculator().enter(5).enter(Operation.ADD);
+        Operation asd = null;
+        assertThat(test, is( test.enter(asd)));
+    }
+
+    @Test
+    public void testNumberNull() {
+        Calculator test = new Calculator().enter(5).enter(Operation.ADD);
+        Number asd = null;
+        assertThat(test, is( test.enter(asd)));
     }
 }

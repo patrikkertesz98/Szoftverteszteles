@@ -1,21 +1,25 @@
 package pti.gyak;
 
+
 import java.util.Collections;
 import java.util.List;
 
 public class Calculator {
     private static final String SEPARATOR = " ";
 
-    public Number result = 0;
+    private Number result = 0;
 
     private String expression = "";
     private List<String> history = Collections.emptyList();
 
     private Operation lastOperation;
 
-    public Number getResult()
-    {
+    public Number getResult() {
         return result;
+    }
+
+    public void setResult(Number value) {
+        this.result = value;
     }
 
 
@@ -34,8 +38,7 @@ public class Calculator {
         return this;
     }
 
-    public void enterPart(Number number)
-    {
+    public void enterPart(Number number) {
         if (lastOperation.equals(Operation.ADD)) {
             result = result.doubleValue() + number.doubleValue();
         } else if (lastOperation.equals(Operation.SUBSTRACT)) {
@@ -82,17 +85,16 @@ public class Calculator {
 
     public String getHistory() {
         StringBuilder s = new StringBuilder();
-            if (history.isEmpty())
-                for (String h: history) {
-                    s.append(h);
-                    s.append("\n");
-                    }
+            for (String h : history) {
+                s.append(h);
+                s.append("\n");
+            }
 
 
-                s.append(expression);
-                s.append(" = ");
-                s.append(resultString());
-                return s.toString();
+        s.append(expression);
+        s.append(" = ");
+        s.append(resultString());
+        return s.toString();
     }
 
     private String resultString() {
